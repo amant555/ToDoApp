@@ -9,8 +9,13 @@ class ToDoList:
         self.tasks.append(task)
 
     def view_tasks(self):
-        for task in self.tasks:
-            print(task)
+        if self.tasks:
+            task_number = 1
+            for task in self.tasks:
+                print(str(task_number) + ". " + task)
+                task_number += 1
+        else:
+            print("Your TODO list is empty!")
 
     def edit_task(self):
         task_to_edit = int(input("Enter the task number to edit (like 1 for first task you added) : "))
