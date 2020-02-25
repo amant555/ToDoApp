@@ -22,6 +22,16 @@ class ToDoListTest(unittest.TestCase):
             todo.view_tasks()
             self.assertEqual("1. Meet Ema at 7\n2. Complete the assignment\n", fake_out.getvalue())
 
+    @patch('builtins.input', side_effect=["Meet Ema at 7", "Complete the assignment"])
+    def test_adding_two_tasks_in_two_different_todo_lists_and_checking_if_view_output_matches_expected(self, mock_input):
+        todo = ToDoList()
+        todo.add_task()
+        todo1 = ToDoList()
+        todo1.add_task()
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            todo.view_tasks()
+            self.assertEqual("1. Meet Ema at 7\n", fake_out.getvalue())
+
     @patch('builtins.input', return_value='')
     def test_adding_no_task_raises_value_error(self, mock_input):
         todo = ToDoList()
