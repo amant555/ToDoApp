@@ -35,7 +35,7 @@ class ToDoList:
                 print(str(task_number) + ". " + task)
                 task_number += 1
 
-            print("Complete Tasks: \n")
+            print('Complete Tasks:\n')
             task_number = 1
             for task in self.completed_tasks:
                 print(str(task_number) + ". " + task)
