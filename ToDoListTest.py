@@ -57,6 +57,18 @@ class ToDoListTest(unittest.TestCase):
             todo.view_tasks()
             self.assertEqual("Your TODO list is empty!\n", fake_out.getvalue())
 
+    @patch('builtins.input', side_effect=["Have Lunch at 1:00pm","Meet Ema at 7:00", 2, "Meet Stacy at 8:00"])
+    def test_adding_two_task_and_editing_second_task(self, mock_input):
+        todo = ToDoList()
+        todo.add_task()
+        todo.add_task()
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            todo.view_tasks()
+            self.assertEqual("1. Have Lunch at 1:00pm\n2. Meet Ema at 7:00\n", fake_out.getvalue())
+        todo.edit_task()
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            todo.view_tasks()
+            self.assertEqual("1. Have Lunch at 1:00pm\n2. Meet Stacy at 8:00\n", fake_out.getvalue())
 
 if __name__ == '__main__':
     unittest.main()
