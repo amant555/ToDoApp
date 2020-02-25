@@ -4,10 +4,11 @@ class ToDoList:
         self.completed_tasks = []
 
     def add_task(self):
-        task = input("Enter the task: ")
-        if len(task) == 0:
-            raise ValueError("Empty Task")
-        self.incomplete_tasks.append(task)
+        task = input("Enter the task: ").strip()
+        if len(task):
+            self.incomplete_tasks.append(task)
+        else:
+            print("Empty Task")
 
     def view_tasks(self):
         if len(self.incomplete_tasks) == 0 and len(self.completed_tasks) == 0:
@@ -19,6 +20,7 @@ class ToDoList:
             for task in self.incomplete_tasks:
                 print(str(task_number) + ". " + task)
                 task_number += 1
+
         elif len(self.completed_tasks) > 0 and len(self.incomplete_tasks) == 0:
             print("Complete Tasks:\n")
             task_number = 1
@@ -49,6 +51,10 @@ class ToDoList:
 
     def mark_completed(self):
         self.view_tasks()
-        task_number = input("Enter the task number of task to be marked as completed: ")
+        task_number = int(input("Enter the task number of task to be marked as completed: "))
         self.completed_tasks.append(self.incomplete_tasks[task_number - 1])
         del self.incomplete_tasks[task_number - 1]
+
+    # def delete_task(self):
+    #     task_to_delete = int(input("Enter task number: "))
+    #     for task in
