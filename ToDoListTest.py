@@ -30,6 +30,18 @@ class ToDoListTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Empty Task"):
             todo.add_task()
 
+    @patch('builtins.input', side_effect=["Meet Ema at 7:00", 1, "Meet Ema at 8:00"])
+    def test_adding_task_and_editing_there_itself(self, mock_input):
+        todo = ToDoList()
+        todo.add_task()
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            todo.view_tasks()
+            self.assertEqual("Meet Ema at 7:00\n", fake_out.getvalue())
+        todo.edit_task()
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            todo.view_tasks()
+            self.assertEqual("Meet Ema at 8:00\n", fake_out.getvalue())
+
 
 if __name__ == '__main__':
     unittest.main()
