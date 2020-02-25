@@ -9,5 +9,10 @@ class ToDoList:
         self.tasks.append(task)
 
     def view_tasks(self):
-        for task in self.tasks:
-            print(task)
+        if self.tasks:
+            task_number = 1
+            for task in self.tasks:
+                print(str(task_number) + ". " + task)
+                task_number += 1
+        else:
+            print("Your TODO list is empty!")
