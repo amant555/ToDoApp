@@ -1,3 +1,10 @@
+def list_of_tasks(task_type):
+    task_number = 1
+    for task in task_type:
+        print(str(task_number) + ". " + task)
+        task_number += 1
+
+
 class ToDoList:
     def __init__(self):
         self.incomplete_tasks = []
@@ -16,30 +23,18 @@ class ToDoList:
 
         elif len(self.incomplete_tasks) > 0 and len(self.completed_tasks) == 0:
             print("Incomplete Tasks:\n")
-            task_number = 1
-            for task in self.incomplete_tasks:
-                print(str(task_number) + ". " + task)
-                task_number += 1
+            list_of_tasks(self.incomplete_tasks)
 
         elif len(self.completed_tasks) > 0 and len(self.incomplete_tasks) == 0:
             print("Complete Tasks:\n")
-            task_number = 1
-            for task in self.completed_tasks:
-                print(str(task_number) + ". " + task)
-                task_number += 1
+            list_of_tasks(self.completed_tasks)
 
         elif len(self.completed_tasks) > 0 and len(self.incomplete_tasks) > 0:
             print("Incomplete Tasks:\n")
-            task_number = 1
-            for task in self.incomplete_tasks:
-                print(str(task_number) + ". " + task)
-                task_number += 1
+            list_of_tasks(self.incomplete_tasks)
 
-            print('Complete Tasks:\n')
-            task_number = 1
-            for task in self.completed_tasks:
-                print(str(task_number) + ". " + task)
-                task_number += 1
+            print('\nComplete Tasks:\n')
+            list_of_tasks(self.completed_tasks)
 
     def edit_task(self):
         task_to_edit = int(input("Enter the task number to edit (like 1 for first task you added) : "))
@@ -54,6 +49,7 @@ class ToDoList:
         task_number = int(input("Enter the task number of task to be marked as completed: "))
         self.completed_tasks.append(self.incomplete_tasks[task_number - 1])
         del self.incomplete_tasks[task_number - 1]
+
 
     # def delete_task(self):
     #     task_to_delete = int(input("Enter task number: "))

@@ -79,7 +79,7 @@ class ToDoListTest(unittest.TestCase):
 
         with patch('sys.stdout', new=StringIO()) as fake_out:
             todo.view_tasks()
-            self.assertEqual("Incomplete Tasks:\n\n1. Have Lunch at 1:00pm\nComplete Tasks:\n\n1. Meet Ema at 7:00\n", fake_out.getvalue())
+            self.assertEqual("Incomplete Tasks:\n\n1. Have Lunch at 1:00pm\n\nComplete Tasks:\n\n1. Meet Ema at 7:00\n", fake_out.getvalue())
 
 
 if __name__ == '__main__':
