@@ -1,8 +1,4 @@
-def list_of_tasks(task_type):
-    task_number = 1
-    for task in task_type:
-        print(str(task_number) + ". " + task)
-        task_number += 1
+from Format import Format
 
 
 class ToDoList:
@@ -11,30 +7,14 @@ class ToDoList:
         self.completed_tasks = []
 
     def add_task(self):
-        task = input("Enter the task: ").strip()
-        if len(task):
+        task = input("Enter the task: ").strip()  # ToDo a test case for checking strip
+        if task:
             self.incomplete_tasks.append(task)
         else:
             print("Empty Task")
 
     def view_tasks(self):
-        if len(self.incomplete_tasks) == 0 and len(self.completed_tasks) == 0:
-            print("Your TODO list is empty!")
-
-        elif len(self.incomplete_tasks) > 0 and len(self.completed_tasks) == 0:
-            print("Incomplete Tasks:\n")
-            list_of_tasks(self.incomplete_tasks)
-
-        elif len(self.completed_tasks) > 0 and len(self.incomplete_tasks) == 0:
-            print("Complete Tasks:\n")
-            list_of_tasks(self.completed_tasks)
-
-        elif len(self.completed_tasks) > 0 and len(self.incomplete_tasks) > 0:
-            print("Incomplete Tasks:\n")
-            list_of_tasks(self.incomplete_tasks)
-
-            print('\nComplete Tasks:\n')
-            list_of_tasks(self.completed_tasks)
+        print(Format.format(self))
 
     def edit_task(self):
         task_to_edit = int(input("Enter the task number to edit (like 1 for first task you added) : "))
