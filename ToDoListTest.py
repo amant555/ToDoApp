@@ -1,6 +1,7 @@
 import unittest
-from unittest.mock import patch
 from io import StringIO
+from unittest.mock import patch
+
 from ToDoList import ToDoList
 
 
@@ -68,7 +69,8 @@ class ToDoListTest(unittest.TestCase):
         todo.edit_task()
         with patch('sys.stdout', new=StringIO()) as fake_out:
             todo.view_tasks()
-            self.assertEqual("Incomplete Tasks:\n\n1. Have Lunch at 1:00pm\n2. Meet Stacy at 8:00\n", fake_out.getvalue())
+            self.assertEqual("Incomplete Tasks:\n\n1. Have Lunch at 1:00pm\n2. Meet Stacy at 8:00\n",
+                             fake_out.getvalue())
 
     @patch('builtins.input', side_effect=["Have Lunch at 1:00pm", "Meet Ema at 7:00", 2])
     def test_marking_a_task_as_complete_moves_it_to_the_complete_list(self, mock_input):
@@ -79,7 +81,39 @@ class ToDoListTest(unittest.TestCase):
 
         with patch('sys.stdout', new=StringIO()) as fake_out:
             todo.view_tasks()
-            self.assertEqual("Incomplete Tasks:\n\n1. Have Lunch at 1:00pm\n\nComplete Tasks:\n\n1. Meet Ema at 7:00\n", fake_out.getvalue())
+            self.assertEqual("Incomplete Tasks:\n\n1. Have Lunch at 1:00pm\n\nComplete Tasks:\n\n1. Meet Ema at 7:00\n",
+                             fake_out.getvalue())
+
+    @patch('builtins.input',
+           side_effect=["Have Lunch at 1:00pm", "Meet Ema at 7:00", "Do your assignments", "Sleep", 2])
+    def test_the_list_order_is_retained_when_a_task_from_middle_is_marked_as_complete(self, mock_input):
+        todo = ToDoList()
+        todo.add_task()
+        todo.add_task()
+        todo.add_task()
+        todo.add_task()
+        todo.mark_completed()
+
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            todo.view_tasks()
+            self.assertEqual(
+                "Incomplete Tasks:\n\n1. Have Lunch at 1:00pm\n2. Do your assignments\n3. Sleep\n\nComplete Tasks:\n\n1. Meet Ema at 7:00\n",
+                fake_out.getvalue())
+
+    @patch('builtins.input',
+           side_effect=["Have Lunch at 1:00pm", "Meet Ema at 7:00", "Do your assignments", "Sleep", 7])
+    def test_the_task_which_is_not_in_list_can_not_be_marked_as_completed(self, mock_input):
+        todo = ToDoList()
+        todo.add_task()
+        todo.add_task()
+        todo.add_task()
+        todo.add_task()
+
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            todo.mark_completed()
+            self.assertEqual(
+                "Incomplete Tasks:\n\n1. Have Lunch at 1:00pm\n2. Meet Ema at 7:00\n3. Do your assignments\n4. Sleep\nThe task you're trying to mark is not present in the list\n",
+                fake_out.getvalue())
 
 
 if __name__ == '__main__':
