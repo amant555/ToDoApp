@@ -51,13 +51,17 @@ class ToDoList:
                 print("Your task cannot be updated!")
 
     def mark_completed(self):
-        self.view_tasks()
-        task_number = int(input("Enter the task number of task to be marked as completed: "))
-        if task_number < 0 or task_number > len(self.incomplete_tasks):
-            print("The task you're trying to mark is not present in the list")
+        if len(self.incomplete_tasks):
+            self.view_tasks()
+            task_number = int(input("Enter the task number of task to be marked as completed: "))
+            if task_number < 0 or task_number > len(self.incomplete_tasks):
+                print("The task you're trying to mark is not present in the list")
+            else:
+                self.completed_tasks.append(self.incomplete_tasks[task_number - 1])
+                del self.incomplete_tasks[task_number - 1]
         else:
-            self.completed_tasks.append(self.incomplete_tasks[task_number - 1])
-            del self.incomplete_tasks[task_number - 1]
+            print("Your TODO list is empty!")
+
 
     # def delete_task(self):
     #     task_to_delete = int(input("Enter task number: "))

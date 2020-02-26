@@ -115,6 +115,27 @@ class ToDoListTest(unittest.TestCase):
                 "Incomplete Tasks:\n\n1. Have Lunch at 1:00pm\n2. Meet Ema at 7:00\n3. Do your assignments\n4. Sleep\nThe task you're trying to mark is not present in the list\n",
                 fake_out.getvalue())
 
+    @patch('builtins.input',
+           side_effect=["Have Lunch at 1:00pm", "Meet Ema at 7:00", "Do your assignments", "Sleep", -1])
+    def test_when_the_task_number_is_negative_it_can_not_be_marked_as_completed(self, mock_input):
+        todo = ToDoList()
+        todo.add_task()
+        todo.add_task()
+        todo.add_task()
+        todo.add_task()
+
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            todo.mark_completed()
+            self.assertEqual(
+                "Incomplete Tasks:\n\n1. Have Lunch at 1:00pm\n2. Meet Ema at 7:00\n3. Do your assignments\n4. Sleep\nThe task you're trying to mark is not present in the list\n",
+                fake_out.getvalue())
+
+    def test_when_TODO_list_is_empty_mark_as_complete_is_not_allowed(self):
+        todo = ToDoList()
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            todo.mark_completed()
+            self.assertEqual("Your TODO list is empty!\n", fake_out.getvalue())
+
 
 if __name__ == '__main__':
     unittest.main()
