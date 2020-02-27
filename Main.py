@@ -16,11 +16,14 @@ def task_options(i):
         2: todo.view_tasks,
         3: todo.edit_task,
         4: todo.mark_completed,
-        # 5: todo.generate_file,
+        # 5: todo.save_file,
     }
     return switcher.get(i, invalid)()
 
 
 while 1:
-    option = int(input("Enter option to proceed: "))
-    task_options(option)
+    try:
+        option = int(input("Enter option to proceed: "))
+        task_options(option)
+    except ValueError:
+        print("Invalid option")
