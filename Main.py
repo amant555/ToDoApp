@@ -2,6 +2,8 @@ from ToDoList import ToDoList
 
 todo = ToDoList()
 
+print("0. Exit\n1. Add task\n2. View task\n3. Edit task\n4. Mark a task as complete")
+
 
 def invalid():
     print("Invalid option")
