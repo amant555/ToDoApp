@@ -163,7 +163,7 @@ class ToDoListTest(unittest.TestCase):
             all_tasks = ""
             for _ in content:
                 all_tasks += _
-            self.assertEqual("Your TODO list is empty!",all_tasks)
+            self.assertEqual("Your TODO list is empty!", all_tasks)
 
     def test_when_TODO_list_is_empty_then_no_task_to_delete(self):
         todo = ToDoList()

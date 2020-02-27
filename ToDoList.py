@@ -48,7 +48,6 @@ class ToDoList:
             print("Your TODO list is empty!")
 
     def delete_task(self):
-
         if len(self.incomplete_tasks) or len(self.completed_tasks):
             # self.view_tasks()
             list_type_selection = int(
