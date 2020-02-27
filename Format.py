@@ -14,8 +14,6 @@ class Format(object):
         elif len(self.completed_tasks) > 0 and len(self.incomplete_tasks) > 0:
             text = "Incomplete Tasks:\n"
             text += (Format.list_of_tasks(self.incomplete_tasks))
-
-        if len(self.completed_tasks) is not 0:
             text += '\n\nComplete Tasks:\n'
             text += (Format.list_of_tasks(self.completed_tasks))
         return text

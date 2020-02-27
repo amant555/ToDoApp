@@ -165,6 +165,40 @@ class ToDoListTest(unittest.TestCase):
                 all_tasks += _
             self.assertEqual("Your TODO list is empty!",all_tasks)
 
+    def test_when_TODO_list_is_empty_then_no_task_to_delete(self):
+        todo = ToDoList()
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            todo.delete_task()
+            self.assertEqual("Your Todo List is empty\n", fake_out.getvalue())
+
+    @patch('builtins.input', side_effect=["Meet Ema at 7:00", 1, 1])
+    def test_when_TODO_list_is_not_empty_then_one_task_to_delete(self, mock_list_type):
+        todo = ToDoList()
+        todo.add_task()
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            todo.delete_task()
+            self.assertEqual("Your task has been deleted successfully\n",
+                             fake_out.getvalue())
+
+    @patch('builtins.input', side_effect=["Meet Ema at 7:00", 1, 2, 1])
+    def test_when_TODO_list_is_not_empty_and_list_type_is_given_then_one_task_to_delete(self, mock_list_type):
+        todo = ToDoList()
+        todo.add_task()
+        todo.mark_completed()
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            todo.delete_task()
+            self.assertEqual("Your task has been deleted successfully\n",
+                             fake_out.getvalue())
+
+    @patch('builtins.input', side_effect=["Meet Rishabh", 1])
+    def test_when_incomplete_list_is_empty_and_completed_list_has_elements(self, mock_list_type):
+        todo = ToDoList()
+        todo.add_task()
+        todo.mark_completed()
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            todo.view_tasks()
+            self.assertEqual("Complete Tasks:\n\n1. Meet Rishabh\n", fake_out.getvalue())
+
 
 if __name__ == '__main__':
     unittest.main()

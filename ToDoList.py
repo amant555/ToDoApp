@@ -47,6 +47,26 @@ class ToDoList:
         else:
             print("Your TODO list is empty!")
 
-    # def delete_task(self):
-    #     task_to_delete = int(input("Enter task number: "))
-    #     for task in
+    def delete_task(self):
+
+        if len(self.incomplete_tasks) or len(self.completed_tasks):
+            # self.view_tasks()
+            list_type_selection = int(
+                input("\nSelect List type to delete from:\n1. For Incomplete_list \n2. For completed_list \n"))
+            task_number = int(input("Enter the task number to be Deleted: "))
+            if list_type_selection == 1:
+                if task_number < 1 or task_number > len(self.incomplete_tasks):
+                    print("The task you're trying to delete is not present in the list")
+                else:
+                    del self.incomplete_tasks[task_number - 1]
+                    print("Your task has been deleted successfully")
+
+            elif list_type_selection == 2:
+                if task_number < 1 or task_number > len(self.completed_tasks):
+                    print("The task you're trying to delete is not present in the list")
+                else:
+                    del self.completed_tasks[task_number - 1]
+                    print("Your task has been deleted successfully")
+
+        else:
+            print("Your Todo List is empty")
