@@ -1,3 +1,5 @@
 mkdir ~/todo
-mv ToDoList2.py ~/todo/
-echo "alias todo='"python ~/todo/ToDoList.py"' >> ~/.bash_profile
+mv ToDoList.py ~/todo/
+mv Format.py ~/todo/
+mv Main.py ~/todo/
+echo "alias todo='"python ~/todo/Main.py"' >> ~/.bash_profile
