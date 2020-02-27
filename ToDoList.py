@@ -16,6 +16,11 @@ class ToDoList:
     def view_tasks(self):
         print(Format.format(self))
 
+    def save_task(self):
+        my_tasks = open("MyTasks.txt", "w")
+        my_tasks.write(Format.format(self))
+        my_tasks.close()
+
     def edit_task(self):
         task_to_edit = int(input("Enter the task number to edit (like 1 for first task you added) : "))
         if task_to_edit < 1 or task_to_edit > len(self.incomplete_tasks):

@@ -136,6 +136,23 @@ class ToDoListTest(unittest.TestCase):
             todo.mark_completed()
             self.assertEqual("Your TODO list is empty!\n", fake_out.getvalue())
 
+    @patch('builtins.input',
+           side_effect=["Have Lunch at 1:00pm", "Send Email at 3:00", "Meeting at 4:00"])
+    def test_when_saving_tasks_in_a_file(self, mock_input):
+        todo = ToDoList()
+        todo.add_task()
+        todo.add_task()
+        todo.add_task()
+        todo.save_task()
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            with open("MyTasks.txt", "r") as file:
+                content = file.readlines()
+            all_tasks = ""
+            for _ in content:
+                all_tasks += _
+            self.assertEqual("Incomplete Tasks:\n\n1. Have Lunch at 1:00pm\n2. Send Email at 3:00\n3. Meeting at 4:00",
+                             all_tasks)
+
 
 if __name__ == '__main__':
     unittest.main()
