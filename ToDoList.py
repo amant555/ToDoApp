@@ -52,7 +52,7 @@ class ToDoList:
         if len(self.incomplete_tasks) or len(self.completed_tasks):
             # self.view_tasks()
             list_type_selection = int(
-                input("\nSelect List type to delete from:\n1. For Incomplete_list \n2. For completed_list \n"))
+                input("\nSelect List type to delete from:\n1. For Incomplete List \n2. For Completed List \n"))
             task_number = int(input("Enter the task number to be Deleted: "))
             if list_type_selection == 1:
                 if task_number < 1 or task_number > len(self.incomplete_tasks):

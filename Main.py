@@ -32,7 +32,7 @@ def task_options(i):
 
 while 1:
     try:
-        option = int(input("Enter option to proceed: "))
+        option = int(input("\nEnter option to proceed: "))
         task_options(option)
     except ValueError:
         print("Invalid option")
