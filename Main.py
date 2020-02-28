@@ -4,6 +4,7 @@ from ToDoList import ToDoList
 formatter = Format()
 todo = ToDoList(formatter)
 options = """
+\n
 0. Exit
 1. Add task
 2. View task
@@ -11,7 +12,6 @@ options = """
 4. Mark a task as complete
 5. Save list to file
 """
-print(options)
 
 
 def invalid():
@@ -32,6 +32,7 @@ def task_options(i):
 
 while 1:
     try:
+        print(options)
         option = int(input("\nEnter option to proceed: "))
         task_options(option)
     except ValueError:
