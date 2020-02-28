@@ -1,5 +1,4 @@
-import datetime
-
+import sys
 
 class ToDoList:
     def __init__(self, formatter):
@@ -8,7 +7,8 @@ class ToDoList:
         self.formatter = formatter
 
     def add_task(self):
-        task = input("Enter the task: ").strip()
+        print("Enter the task below  '(Exit :ctrl-d)'")
+        task = sys.stdin.read().strip()
         if task:
             self.incomplete_tasks.append(task)
         else:
@@ -18,7 +18,7 @@ class ToDoList:
         print(self.formatter.format(self))
 
     def save_task(self):
-        file_name = "MyTasks_" + str(datetime.datetime.now().strftime('%d-%m-%Y_%H:%M')) + ".txt"
+        file_name = "MyTasks.txt"
         my_tasks = open(file_name, "w")
         my_tasks.write(self.formatter.format(self))
         my_tasks.close()
