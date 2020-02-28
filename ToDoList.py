@@ -2,9 +2,10 @@ from Format import Format
 
 
 class ToDoList:
-    def __init__(self):
+    def __init__(self, formatter):
         self.incomplete_tasks = []
         self.completed_tasks = []
+        self.formatter = formatter
 
     def add_task(self):
         task = input("Enter the task: ").strip()  # ToDo a test case for checking strip
@@ -14,11 +15,11 @@ class ToDoList:
             print("Empty Task")
 
     def view_tasks(self):
-        print(Format.format(self))
+        print(self.formatter.format(self))
 
     def save_task(self):
         my_tasks = open("MyTasks.txt", "w")
-        my_tasks.write(Format.format(self))
+        my_tasks.write(self.formatter.format(self))
         my_tasks.close()
 
     def edit_task(self):

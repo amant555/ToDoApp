@@ -1,21 +1,21 @@
 class Format(object):
-    def format(self):
+    def format(self, todo):
         text = ""
-        if len(self.incomplete_tasks) == 0 and len(self.completed_tasks) == 0:
+        if len(todo.incomplete_tasks) == 0 and len(todo.completed_tasks) == 0:
             text = "Your TODO list is empty!"
-        elif len(self.incomplete_tasks) > 0 and len(self.completed_tasks) == 0:
+        elif len(todo.incomplete_tasks) > 0 and len(todo.completed_tasks) == 0:
             text = "Incomplete Tasks:\n"
-            text += (Format.list_of_tasks(self.incomplete_tasks))
+            text += (Format.list_of_tasks(todo.incomplete_tasks))
 
-        elif len(self.completed_tasks) > 0 and len(self.incomplete_tasks) == 0:
+        elif len(todo.completed_tasks) > 0 and len(todo.incomplete_tasks) == 0:
             text = "Complete Tasks:\n"
-            text += (Format.list_of_tasks(self.completed_tasks))
+            text += (Format.list_of_tasks(todo.completed_tasks))
 
-        elif len(self.completed_tasks) > 0 and len(self.incomplete_tasks) > 0:
+        elif len(todo.completed_tasks) > 0 and len(todo.incomplete_tasks) > 0:
             text = "Incomplete Tasks:\n"
-            text += (Format.list_of_tasks(self.incomplete_tasks))
+            text += (Format.list_of_tasks(todo.incomplete_tasks))
             text += '\n\nComplete Tasks:\n'
-            text += (Format.list_of_tasks(self.completed_tasks))
+            text += (Format.list_of_tasks(todo.completed_tasks))
         return text
 
     @staticmethod
