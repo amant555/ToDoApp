@@ -1,8 +1,15 @@
 from ToDoList import ToDoList
 
 todo = ToDoList()
-
-print("0. Exit\n1. Add task\n2. View task\n3. Edit task\n4. Mark a task as complete")
+options = """
+0. Exit
+1. Add task
+2. View task
+3. Edit task
+4. Mark a task as complete
+5. Save list to file
+"""
+print(options)
 
 
 def invalid():
@@ -16,7 +23,7 @@ def task_options(i):
         2: todo.view_tasks,
         3: todo.edit_task,
         4: todo.mark_completed,
-        # 5: todo.save_file,
+        5: todo.save_task,
     }
     return switcher.get(i, invalid)()
 
