@@ -1,10 +1,11 @@
 import sys
+from SaveListsToFiles import SaveListsToFiles
 
 
 class ToDoList:
     def __init__(self, formatter):
-        self.incomplete_tasks = []
-        self.completed_tasks = []
+        self.incomplete_tasks = SaveListsToFiles().incomplete_task_list()
+        self.completed_tasks = SaveListsToFiles().complete_task_list()
         self.formatter = formatter
 
     def add_task(self):
@@ -23,6 +24,7 @@ class ToDoList:
         my_tasks = open(file_name, "w")
         my_tasks.write(self.formatter.format(self))
         my_tasks.close()
+        SaveListsToFiles().save_to_files(self)
 
     def edit_task(self):
         task_to_edit = int(input("Enter the task number to edit (like 1 for first task you added) : "))

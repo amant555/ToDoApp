@@ -1,12 +1,13 @@
 import unittest
 from io import StringIO
 from unittest.mock import patch
-
 from Format import Format
+from SaveListsToFiles import SaveListsToFiles
 from ToDoList import ToDoList
 
 
 class ToDoListTest(unittest.TestCase):
+
     @patch('builtins.input', return_value="Meet Ema at 7")
     def test_adding_single_task_in_todo_and_matching_view_output_with_expected(self, mock_input):
         formatter = Format()
@@ -123,7 +124,8 @@ class ToDoListTest(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as fake_out:
             todo.mark_completed()
             self.assertEqual(
-                "Incomplete Tasks:\n\n1. Have Lunch at 1:00pm\n2. Meet Ema at 7:00\n3. Do your assignments\n4. Sleep\nThe task you're trying to mark is not present in the list\n",
+                "Incomplete Tasks:\n\n1. Have Lunch at 1:00pm\n2. Meet Ema at 7:00\n3. Do your assignments\n4. "
+                "Sleep\nThe task you're trying to mark is not present in the list\n",
                 fake_out.getvalue())
 
     @patch('builtins.input',
@@ -166,10 +168,13 @@ class ToDoListTest(unittest.TestCase):
                 all_tasks += _
             self.assertEqual("Incomplete Tasks:\n\n1. Have Lunch at 1:00pm\n2. Send Email at 3:00\n3. Meeting at 4:00",
                              all_tasks)
+        clear_saved_files = SaveListsToFiles()
+        clear_saved_files.clear()
 
     @patch('builtins.input', return_value="")
     def test_when_saving_empty_tasks_in_a_file(self, mock_input):
         formatter = Format()
+
         todo = ToDoList(formatter)
         todo.save_task()
         with patch('sys.stdout', new=StringIO()) as fake_out:
@@ -179,9 +184,12 @@ class ToDoListTest(unittest.TestCase):
             for _ in content:
                 all_tasks += _
             self.assertEqual("Your TODO list is empty!", all_tasks)
+        clear_saved_files = SaveListsToFiles()
+        clear_saved_files.clear()
 
     def test_when_TODO_list_is_empty_then_no_task_to_delete(self):
         formatter = Format()
+
         todo = ToDoList(formatter)
         with patch('sys.stdout', new=StringIO()) as fake_out:
             todo.delete_task()
@@ -217,6 +225,15 @@ class ToDoListTest(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as fake_out:
             todo.view_tasks()
             self.assertEqual("Complete Tasks:\n\n1. Meet Rishabh\n", fake_out.getvalue())
+
+    @patch('builtins.input', return_value="Meet DJ Khaled")
+    def test_the_todo_list_persists_after_each_session(self, mock_input):
+        formatter = Format()
+        todo = ToDoList(formatter)
+        todo.add_task()
+        todo_another_one = ToDoList(formatter)
+        self.assertEqual(todo.view_tasks(), todo_another_one.view_tasks())
+
 
 
 if __name__ == '__main__':

@@ -17,7 +17,7 @@ options = """
 def invalid():
     print("Invalid option")
 
-git
+
 def view_and_edit():
     todo.view_tasks()
     todo.edit_task()
