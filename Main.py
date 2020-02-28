@@ -17,13 +17,18 @@ options = """
 def invalid():
     print("Invalid option")
 
+git
+def view_and_edit():
+    todo.view_tasks()
+    todo.edit_task()
+
 
 def task_options(i):
     switcher = {
         0: exit,
         1: todo.add_task,
         2: todo.view_tasks,
-        3: todo.edit_task,
+        3: view_and_edit,
         4: todo.mark_completed,
         5: todo.save_task,
     }

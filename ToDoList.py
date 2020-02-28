@@ -1,5 +1,6 @@
 import sys
 
+
 class ToDoList:
     def __init__(self, formatter):
         self.incomplete_tasks = []
