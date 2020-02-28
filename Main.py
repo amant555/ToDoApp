@@ -1,6 +1,8 @@
+from Format import Format
 from ToDoList import ToDoList
 
-todo = ToDoList()
+formatter = Format()
+todo = ToDoList(formatter)
 options = """
 0. Exit
 1. Add task
