@@ -1,4 +1,4 @@
-from Format import Format
+import datetime
 
 
 class ToDoList:
@@ -8,7 +8,7 @@ class ToDoList:
         self.formatter = formatter
 
     def add_task(self):
-        task = input("Enter the task: ").strip()  # ToDo a test case for checking strip
+        task = input("Enter the task: ").strip()
         if task:
             self.incomplete_tasks.append(task)
         else:
@@ -18,7 +18,8 @@ class ToDoList:
         print(self.formatter.format(self))
 
     def save_task(self):
-        my_tasks = open("MyTasks.txt", "w")
+        file_name = "MyTasks_" + str(datetime.datetime.now().strftime('%d-%m-%Y_%H:%M')) + ".txt"
+        my_tasks = open(file_name, "w")
         my_tasks.write(self.formatter.format(self))
         my_tasks.close()
 
