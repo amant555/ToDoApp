@@ -9,8 +9,7 @@ class ToDoList:
         self.formatter = formatter
 
     def add_task(self):
-        print("Enter the task below  '(Exit :ctrl-d)'")
-        task = sys.stdin.read().strip()
+        task = input("Enter the task :").strip()
         if task:
             self.incomplete_tasks.append(task)
         else:
