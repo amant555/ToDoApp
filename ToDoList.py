@@ -15,8 +15,7 @@ class ToDoList:
         print(self.formatter.format(self))
 
     def save_task(self):
-        file_name = "MyTasks.txt"
-        my_tasks = open(file_name, "w")
+        my_tasks = open("MyTasks.txt", "w")
         my_tasks.write(self.formatter.format(self))
         my_tasks.close()
         SaveListsToFiles().save_to_files(self)
@@ -46,26 +45,3 @@ class ToDoList:
                 del self.incomplete_tasks[task_number - 1]
         else:
             print("Your TODO list is empty!")
-
-    def delete_task(self):
-        if len(self.incomplete_tasks) or len(self.completed_tasks):
-            # self.view_tasks()
-            list_type_selection = int(
-                input("\nSelect List type to delete from:\n1. For Incomplete List \n2. For Completed List \n"))
-            task_number = int(input("Enter the task number to be Deleted: "))
-            if list_type_selection == 1:
-                if task_number < 1 or task_number > len(self.incomplete_tasks):
-                    print("The task you're trying to delete is not present in the list")
-                else:
-                    del self.incomplete_tasks[task_number - 1]
-                    print("Your task has been deleted successfully")
-
-            elif list_type_selection == 2:
-                if task_number < 1 or task_number > len(self.completed_tasks):
-                    print("The task you're trying to delete is not present in the list")
-                else:
-                    del self.completed_tasks[task_number - 1]
-                    print("Your task has been deleted successfully")
-
-        else:
-            print("Your Todo List is empty")
