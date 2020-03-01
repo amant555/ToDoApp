@@ -1,4 +1,3 @@
-import sys
 from SaveListsToFiles import SaveListsToFiles
 
 
@@ -9,11 +8,8 @@ class ToDoList:
         self.formatter = formatter
 
     def add_task(self):
-        task = input("Enter the task :").strip()
-        if task:
-            self.incomplete_tasks.append(task)
-        else:
-            print("Empty Task")
+        new_task = input("Enter the task :").strip()
+        self.incomplete_tasks.append(new_task) if new_task else print("Empty Task")
 
     def view_tasks(self):
         print(self.formatter.format(self))
